@@ -28,3 +28,10 @@ camunda.bpm.plugin.mail:
 
   user: test@camunda.com
   password: bpmn
+
+# Required by the CIB seven webapp (SevenUserProvider). The JWT secret must be a
+# base64-decodable string of at least 155 characters, otherwise context startup fails.
+cibseven:
+  webclient:
+    authentication:
+      jwtSecret: Xh4Ax45EWbKfDnm9ZhmvEvO1HeLEAy2SgfTqLVt6I43JAETBZIIvT1jFxH7CQmhYiiG5FPm4hAPAXg80A2jskpujCodtql3uZiBEqKLWGiD5Y2KJ2sagKxGAGHYxQtPPYimdLYY4RljKCJpAKjamAKo3cqKaVn6z
