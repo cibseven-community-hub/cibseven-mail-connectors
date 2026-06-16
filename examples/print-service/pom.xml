@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>cibseven-mail-example-print-service</artifactId>
-  <name>Camunda Automation Platform Mail Example Print Service</name>
+  <name>CIB seven Mail Example Print Service</name>
 
   <packaging>jar</packaging>
 

@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>cibseven-mail.example.pizza</artifactId>
-  <name>Camunda Automation Platform Mail Example Pizza</name>
+  <name>CIB seven Mail Example Pizza</name>
 
   <packaging>war</packaging>
 

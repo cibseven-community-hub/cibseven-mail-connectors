@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>cibseven-mail-extension-root</artifactId>
-  <name>Camunda Automation Platform Mail Extension</name>
+  <name>CIB seven Mail Extension</name>
   <packaging>pom</packaging>
   
   <modules>
