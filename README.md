@@ -4,9 +4,9 @@
 [![](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%207-26d07c)](https://github.com/camunda-community-hub/community/blob/main/extension-lifecycle.md#compatiblilty)
 [![](https://img.shields.io/badge/Lifecycle-Stable-brightgreen)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#stable-)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![Build project with Maven](https://github.com/camunda-community-hub/camunda-bpm-mail/workflows/Build%20project%20with%20Maven/badge.svg)
+![Build project with Maven](https://github.com/camunda-community-hub/cibseven-mail/workflows/Build%20project%20with%20Maven/badge.svg)
 
-A community extension for Camunda Platform 7 to integrate emails in a process and interact with them. It was previously known as `camunda-bpm-mail`.
+A community extension for Camunda Platform 7 to integrate emails in a process and interact with them. It was previously known as `cibseven-mail`.
 
 ![Sample process](docs/sample-process.png)
 
@@ -29,23 +29,23 @@ Read [these instructions](./extension/spring-boot).
 
 ### For Embedded Process Engine
 
-Add `camunda-bpm-mail-core` as dependency to your application. Using Maven, you have to add the following lines to your POM:
+Add `cibseven-mail-core` as dependency to your application. Using Maven, you have to add the following lines to your POM:
 
 ```xml
 <dependency>
-  <groupId>org.camunda.bpm.extension</groupId>
-  <artifactId>camunda-bpm-mail-core</artifactId>
+  <groupId>org.cibseven.bpm.extension</groupId>
+  <artifactId>cibseven-mail-core</artifactId>
   <version>1.5.1</version>
 </dependency>
 ```
 
 ### For Shared Process Engine
 
-Add `camunda-bpm-mail-core-1.5.1.jar` to your application server (e.g. `apache-tomcat-8.0.24\lib`).
+Add `cibseven-mail-core-1.5.1.jar` to your application server (e.g. `apache-tomcat-8.0.24\lib`).
 
 Also make sure that you included the following dependencies:
 
-* [camunda-connect-core](http://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-core) >= 1.6.0
+* [cibseven-connect-core](http://mvnrepository.com/artifact/org.cibseven.connect/cibseven-connect-core) >= 1.6.0
 * [JakartaMail](https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api) >= 2.1.2
 * [Eclipse Angus Mail](https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail) >= 2.0.2
 * [slf4j-api](http://mvnrepository.com/artifact/org.slf4j/slf4j-api) >= 2.0.11

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
+  "name": "CIB seven - Mail Delete",
+  "id": "org.cibseven.bpm.extension.mail.delete",
+  "version": 1,
+  "description": "Delete e-mails from a folder via the CIB seven mail connector (connectorId: mail-delete). IMAP settings come from MAIL_CONFIG.",
+  "icon": {
+    "contents": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNDMDM5MkIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHJ4PSIyIi8+PHBhdGggZD0ibTIgNyAxMCA2IDEwLTYiLz48cGF0aCBkPSJtOSAxMiA2IDZtMC02LTYgNiIvPjwvc3ZnPg=="
+  },
+  "keywords": [
+    "mail",
+    "email",
+    "imap",
+    "delete",
+    "connector"
+  ],
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "groups": [
+    {
+      "id": "request",
+      "label": "Delete"
+    }
+  ],
+  "scopes": [
+    {
+      "type": "camunda:Connector",
+      "properties": [
+        {
+          "type": "Hidden",
+          "value": "mail-delete",
+          "binding": {
+            "type": "property",
+            "name": "connectorId"
+          }
+        },
+        {
+          "label": "Folder",
+          "group": "request",
+          "description": "Mailbox folder to delete from.",
+          "type": "String",
+          "value": "INBOX",
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "folder"
+          },
+          "constraints": {
+            "notEmpty": true
+          }
+        },
+        {
+          "label": "Message IDs",
+          "group": "request",
+          "description": "Provide exactly ONE selector (Message IDs, Message numbers, or Mails). Expression resolving to the RFC Message-ID(s) to delete, e.g. ${messageIds}.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "messageIds"
+          }
+        },
+        {
+          "label": "Message numbers",
+          "group": "request",
+          "description": "Alternative selector. Expression resolving to the message number(s) within the folder.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "messageNumbers"
+          }
+        },
+        {
+          "label": "Mails",
+          "group": "request",
+          "description": "Alternative selector. Expression resolving to the list of mails to delete, e.g. ${mails} returned by a Mail Poll task.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "mails"
+          }
+        }
+      ]
+    }
+  ]
+}

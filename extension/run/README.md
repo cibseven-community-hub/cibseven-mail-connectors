@@ -9,7 +9,7 @@ used for configuring Camunda run, and registers the connectors upon startup.
 
 This plugin can be used with Camunda 7 Run.
 
-1. Add the `camunda-bpm-mail-extension-run-1.3.1.jar`to the `configuration/userlib`folder.
+1. Add the `cibseven-mail-extension-run-1.3.1.jar`to the `configuration/userlib`folder.
 
 2. Configure the plugin.
 
@@ -22,4 +22,4 @@ To use the notification service, please register Beans of type `Consumer<Mail>` 
 
 ## How to Configure it?
 
-As this plugin relies on the camunda-bpm-mail spring-boot-starter, head over to the [configuration section](./../spring-boot/README.md) there.
+As this plugin relies on the cibseven-mail spring-boot-starter, head over to the [configuration section](./../spring-boot/README.md) there.

@@ -10,9 +10,9 @@ This plugin can be used with Camunda 7 Spring Boot Starter.
 1. Add the dependency:
    ```xml
    <dependency>
-     <groupId>org.camunda.bpm.extension</groupId>
-     <artifactId>camunda-bpm-mail-spring-boot-starter</artifactId>
-     <version>${version.camunda-bpm-mail}</version>
+     <groupId>org.cibseven.bpm.extension</groupId>
+     <artifactId>cibseven-mail-spring-boot-starter</artifactId>
+     <version>${version.cibseven-mail}</version>
    </dependency>
    ```
 

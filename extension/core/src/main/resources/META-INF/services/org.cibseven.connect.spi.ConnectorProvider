@@ -1,0 +1,3 @@
+org.cibseven.bpm.extension.mail.send.SendMailProvider
+org.cibseven.bpm.extension.mail.poll.PollMailProvider
+org.cibseven.bpm.extension.mail.delete.DeleteMailProvider

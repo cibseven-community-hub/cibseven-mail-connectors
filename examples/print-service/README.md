@@ -1,4 +1,4 @@
-# camunda-bpm-mail - example - print service
+# cibseven-mail - example - print service
 
 This example demonstrate how to
 
@@ -10,7 +10,7 @@ This example demonstrate how to
 ## How to run it
 
 1. Build the executable JAR using Maven `mvn clean install`. If you want to adjust the predefined configuration, use `src/main/resources/application.yaml` before you build.
-2. Run the application using `java -jar target/camunda-bpm-mail-example-print-service-<PROJECT_VERSION>.jar`. To use an external configuration, please find instructions [in the guide](https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config).
+2. Run the application using `java -jar target/cibseven-mail-example-print-service-<PROJECT_VERSION>.jar`. To use an external configuration, please find instructions [in the guide](https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config).
 3. Send a mail with the attached file which should be printed
 4. Check that a user task is created - complete it
 5. Now, check your mails
