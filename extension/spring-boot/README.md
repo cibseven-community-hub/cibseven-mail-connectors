@@ -1,11 +1,11 @@
-# Camunda-platform-7-mail Starter for Spring Boot
+# Cibseven-mail Starter for Spring Boot
 
-This starter wraps the camunda-platform-7-mail community connector and is intended to be used with camunda spring-boot.
+This starter wraps the cibseven-mail community connector and is intended to be used with CIB seven Spring Boot.
 The plugin configures the connectors for sending, polling, and deleting e-mails based on the YAML/Properties file used for configuring your spring boot app, and registers the connectors upon startup.
 
 ## Install
 
-This plugin can be used with Camunda 7 Spring Boot Starter.
+This plugin can be used with CIB seven Spring Boot Starter.
 
 1. Add the dependency:
    ```xml
