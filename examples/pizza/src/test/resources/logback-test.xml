@@ -9,8 +9,8 @@
     <appender-ref ref="console"/>
   </root>
   
-  <logger name="org.camunda" level="info" />
-  <logger name="org.camunda.bpm.extension.mail" level="debug" />
+  <logger name="org.cibseven" level="info" />
+  <logger name="org.cibseven.bpm.extension.mail" level="debug" />
   
   <logger name="com.icegreen.greenmail" level="debug" />
   

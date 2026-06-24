@@ -1,12 +1,11 @@
-# camunda-platform-7-mail
+# cibseven-mail
 
-[![](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)](https://github.com/camunda-community-hub/community)
-[![](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%207-26d07c)](https://github.com/camunda-community-hub/community/blob/main/extension-lifecycle.md#compatiblilty)
-[![](https://img.shields.io/badge/Lifecycle-Stable-brightgreen)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#stable-)
+
+[![CIB seven 2.2.0](https://img.shields.io/badge/CIB%20seven-2.2.0-orange.svg)](https://docs.cibseven.org/manual/2.2/)
+[![Maven Central](https://img.shields.io/maven-central/v/org.cibseven.community.data/cibseven-mail?label=Maven%20Central)](https://central.sonatype.com/artifact/org.cibseven.community.data/cibseven-mail)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![Build project with Maven](https://github.com/camunda-community-hub/camunda-bpm-mail/workflows/Build%20project%20with%20Maven/badge.svg)
 
-A community extension for Camunda Platform 7 to integrate emails in a process and interact with them. It was previously known as `camunda-bpm-mail`.
+A community extension for CIB seven to integrate emails in a process and interact with them.
 
 ![Sample process](docs/sample-process.png)
 
@@ -20,7 +19,7 @@ A community extension for Camunda Platform 7 to integrate emails in a process an
 ## Install
 
 > Requirements:
-* Camunda Platform 7 >= 7.20.0
+* CIB seven >= 2.0.0
 * Java 17
 
 ### For Spring Boot
@@ -29,23 +28,23 @@ Read [these instructions](./extension/spring-boot).
 
 ### For Embedded Process Engine
 
-Add `camunda-bpm-mail-core` as dependency to your application. Using Maven, you have to add the following lines to your POM:
+Add `cibseven-mail-core` as dependency to your application. Using Maven, you have to add the following lines to your POM:
 
 ```xml
 <dependency>
-  <groupId>org.camunda.bpm.extension</groupId>
-  <artifactId>camunda-bpm-mail-core</artifactId>
-  <version>1.5.1</version>
+  <groupId>org.cibseven.bpm.extension</groupId>
+  <artifactId>cibseven-mail-core</artifactId>
+  <version>2.2.0</version>
 </dependency>
 ```
 
 ### For Shared Process Engine
 
-Add `camunda-bpm-mail-core-1.5.1.jar` to your application server (e.g. `apache-tomcat-8.0.24\lib`).
+Add `cibseven-mail-core-${VERSION}.jar` to your application server (e.g. `apache-tomcat-10.1.55\lib`).
 
 Also make sure that you included the following dependencies:
 
-* [camunda-connect-core](http://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-core) >= 1.6.0
+* [cibseven-connect-core](http://mvnrepository.com/artifact/org.cibseven.connect/cibseven-connect-core) >= 2.0.0
 * [JakartaMail](https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api) >= 2.1.2
 * [Eclipse Angus Mail](https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail) >= 2.0.2
 * [slf4j-api](http://mvnrepository.com/artifact/org.slf4j/slf4j-api) >= 2.0.11
@@ -54,7 +53,7 @@ If you use Wildfly, follow the [special instructions](docs/shared-process-engine
 
 ## How to use it?
 
-The extension is build on top of the [Connectors API](http://docs.camunda.org/manual/latest/reference/connect/) and provide some connectors for interacting with emails. The connectors can be used inside a process as implementation of a service task and are referenced by id. Use the Camunda Modeler to configure it.
+The extension is build on top of the [Connectors API](https://docs.cibseven.org/manual/latest/reference/connect/) and provide some connectors for interacting with emails. The connectors can be used inside a process as implementation of a service task and are referenced by id. Use the Camunda Modeler to configure it.
 
 ```xml
 <serviceTask id="sendMail" name="Send Mail Task">
@@ -67,7 +66,7 @@ The extension is build on top of the [Connectors API](http://docs.camunda.org/ma
 </serviceTask>
 ```
 
-See the [connectors user guide](http://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) how to configure the process engine to use connectors.
+See the [connectors user guide](https://docs.cibseven.org/manual/latest/user-guide/process-engine/connectors/) how to configure the process engine to use connectors.
 
 ### Send Mails
 
@@ -192,7 +191,7 @@ You can find some sample configurations at [extension/core/configs](extension/co
 
 ### Alternative Configuration
 
-if you are running camunda in the environment that supports Mail Service and [Java Naming and Directory Interface (JNDI)](https://en.wikipedia.org/wiki/Java_Naming_and_Directory_Interface), you can configure mail session in the container and make it available through jndi. Provide the jndi-name of your bound mail session within properties file `mail-config.properties` like this:
+if you are running CIB seven in the environment that supports Mail Service and [Java Naming and Directory Interface (JNDI)](https://en.wikipedia.org/wiki/Java_Naming_and_Directory_Interface), you can configure mail session in the container and make it available through jndi. Provide the jndi-name of your bound mail session within properties file `mail-config.properties` like this:
 
 ```
 mail.session.jndi.name=java:jboss/mail/MyMailSessionName
@@ -254,11 +253,10 @@ Depends on the input of the community. Some ideas:
 
 ## Contribution
 
-Found a bug? Please report it using [GitHub Issues](https://github.com/camunda/camunda-platform-7-mail/issues).
+Found a bug? Please report it using [GitHub Issues](https://github.com/cibseven-community-hub/cibseven-mail-connectors/issues).
 
-Want to extend, improve or fix a bug in the extension? [Pull Requests](https://github.com/camunda/camunda-platform-7-mail/pulls) are very welcome.
+Want to extend, improve or fix a bug in the extension? [Pull Requests](https://github.com/cibseven-community-hub/cibseven-mail-connectors/pulls) are very welcome.
 
-Want to discuss something? The [Camunda Forum](https://forum.camunda.io/c/community-extensions) might be the best place for it.
 
 ## FAQ
 

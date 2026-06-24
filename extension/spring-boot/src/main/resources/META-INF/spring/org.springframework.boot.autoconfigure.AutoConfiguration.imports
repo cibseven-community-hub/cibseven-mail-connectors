@@ -1,1 +1,1 @@
-org.camunda.bpm.extension.mail.spring.boot.MailConnectorConfiguration
+org.cibseven.bpm.extension.mail.spring.boot.MailConnectorConfiguration

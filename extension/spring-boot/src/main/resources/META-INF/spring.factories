@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.camunda.bpm.extension.mail.spring.boot.MailConnectorConfiguration
+org.cibseven.bpm.extension.mail.spring.boot.MailConnectorConfiguration

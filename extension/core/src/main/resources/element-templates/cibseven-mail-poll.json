@@ -1,0 +1,71 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
+  "name": "CIB seven - Mail Poll",
+  "id": "org.cibseven.bpm.extension.mail.poll",
+  "version": 1,
+  "description": "Poll e-mails from a folder via the CIB seven mail connector (connectorId: mail-poll). IMAP settings come from MAIL_CONFIG.",
+  "icon": {
+    "contents": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExIDE4QzExIDE3LjY2IDExLjA0IDE3LjMzIDExLjA5IDE3SDRWN0wxMiAxMkwyMCA3VjEyLjA5QzIwLjcyIDEyLjIxIDIxLjUgMTIuNSAyMiAxM1Y1QzIyIDMuOSAyMS4xIDMgMjAgM0g0QzIuOSAzIDIgMy45IDIgNVYxN0MyIDE4LjEgMi45IDE5IDQgMTlIMTEuMDlDMTEuMDQgMTguNjcgMTEgMTguMzQgMTEgMThaTTIwIDVMMTIgMTBMNCA1SDIwWiIgZmlsbD0iIzRENjI3OCIvPgo8Y2lyY2xlIGN4PSIxOCIgY3k9IjE4IiByPSI1IiBmaWxsPSIjNEQ2Mjc4Ii8+CjxwYXRoIGQ9Ik0xOCAyMUwxNSAxOEgxN1YxNUgxOVYxOEgyMUwxOCAyMVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
+  },
+  "keywords": [
+    "mail",
+    "email",
+    "imap",
+    "poll",
+    "receive",
+    "connector"
+  ],
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "groups": [
+    {
+      "id": "request",
+      "label": "Poll"
+    },
+    {
+      "id": "output",
+      "label": "Output mapping"
+    }
+  ],
+  "scopes": [
+    {
+      "type": "camunda:Connector",
+      "properties": [
+        {
+          "type": "Hidden",
+          "value": "mail-poll",
+          "binding": {
+            "type": "property",
+            "name": "connectorId"
+          }
+        },
+        {
+          "label": "Folder",
+          "group": "request",
+          "description": "Mailbox folder to read from.",
+          "type": "String",
+          "value": "INBOX",
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "folder"
+          },
+          "constraints": {
+            "notEmpty": true
+          }
+        },
+        {
+          "label": "Mails -> variable",
+          "group": "output",
+          "description": "Process variable that receives the list of polled mails.",
+          "type": "String",
+          "value": "mails",
+          "binding": {
+            "type": "camunda:outputParameter",
+            "source": "${mails}"
+          }
+        }
+      ]
+    }
+  ]
+}
