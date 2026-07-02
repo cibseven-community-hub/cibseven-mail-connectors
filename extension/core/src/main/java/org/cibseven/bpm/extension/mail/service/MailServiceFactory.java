@@ -22,6 +22,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.cibseven.bpm.extension.mail.AbstractFactory;
 import org.cibseven.bpm.extension.mail.config.JakartaMailProperties;
+import org.cibseven.bpm.extension.mail.oauth.OAuthCredentials;
+import org.cibseven.bpm.extension.mail.oauth.OAuthUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,19 +58,44 @@ public class MailServiceFactory extends AbstractFactory<MailService> {
         throw new IllegalArgumentException(msg, e);
       }
     } else {
+      OAuthCredentials oauthCredentials = readOAuthCredentials(jakartaMailProperties);
+      if (oauthCredentials != null) {
+        LOGGER.debug("OAuth2 credentials detected, enabling XOAUTH2 mechanism");
+        jakartaMailProperties.put("mail.smtp.auth.mechanisms", "XOAUTH2");
+        jakartaMailProperties.put("mail.smtp.sasl.enable", "true");
+        jakartaMailProperties.put("mail.smtp.sasl.mechanisms", "XOAUTH2");
+        jakartaMailProperties.put("mail.imaps.auth.mechanisms", "XOAUTH2");
+        jakartaMailProperties.put("mail.imaps.sasl.enable", "true");
+        jakartaMailProperties.put("mail.imaps.sasl.mechanisms", "XOAUTH2");
+      }
       session =
           Session.getInstance(
               jakartaMailProperties,
               new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                  return new PasswordAuthentication(
-                      jakartaMailProperties.getProperty("mail.user"),
-                      jakartaMailProperties.getProperty("mail.password"));
+                  String user = jakartaMailProperties.getProperty("mail.user");
+                  String credential =
+                      oauthCredentials != null
+                          ? OAuthUtil.generateAccessToken(oauthCredentials)
+                          : jakartaMailProperties.getProperty("mail.password");
+                  return new PasswordAuthentication(user, credential);
                 }
               });
     }
     return session;
+  }
+
+  private OAuthCredentials readOAuthCredentials(Properties properties) {
+    String clientId = properties.getProperty("mail.oauth.clientId");
+    if (clientId == null || clientId.isBlank()) {
+      return null;
+    }
+    return new OAuthCredentials(
+        clientId,
+        properties.getProperty("mail.oauth.clientSecret"),
+        properties.getProperty("mail.oauth.authenticationServerUrl"),
+        properties.getProperty("mail.oauth.scope"));
   }
 
   private boolean isJndiSession(Properties properties) {
