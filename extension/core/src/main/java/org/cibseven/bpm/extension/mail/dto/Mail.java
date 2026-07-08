@@ -21,7 +21,9 @@ import jakarta.mail.Part;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -145,6 +147,15 @@ public class Mail implements Serializable {
     return message.isMimeType("multipart") || message.getContent() instanceof Multipart;
   }
 
+  private static String readAsString(Part part) throws IOException, MessagingException {
+    Object content = part.getContent();
+    if (content instanceof String s) return s;
+    if (content instanceof InputStream in) {
+      return new String(in.readAllBytes(), StandardCharsets.UTF_8); // ideally use part's charset
+    }
+    return String.valueOf(content);
+  }
+
   protected static void processMessagePartContent(Part part, Mail mail)
       throws MessagingException, IOException {
 
@@ -156,10 +167,9 @@ public class Mail implements Serializable {
     } else {
 
       if (part.isMimeType("text/plain")) {
-        mail.text = (String) part.getContent();
-
+        mail.text = readAsString(part);
       } else if (part.isMimeType("text/html")) {
-        mail.html = (String) part.getContent();
+        mail.html = readAsString(part);
       }
     }
   }
