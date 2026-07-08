@@ -263,9 +263,20 @@ See also
 * [JavaMail Project Documentation/FAQ](https://java.net/projects/javamail/pages/Home)
 * [Oracle JavaMail FAQ](http://www.oracle.com/technetwork/java/faq-135477.html)
 
-### Can't send / receive mails from Gmail
+### How to configure Gmail
 
-It can be that Google blocks the requests because it estimates your application as unsafe. You may also receive an email from Google. To fix this go to https://www.google.com/settings/security/lesssecureapps and enable less secure apps.
+Like most email providers, Gmail no longer allows applications to authenticate using a regular account password (basic authentication). Instead, you must use either OAuth 2.0 or an App Password.
+
+To configure Gmail with an **App Password**, follow these steps:
+1. Enable 2-Step Verification on the Gmail account.
+2. Go to https://myaccount.google.com/apppasswords and create an App Password for your application.
+3. Configure the following credentials:
+```yaml
+camunda.bpm.plugin.mail:
+  user: the gmail account   # the actual mailbox
+  password: xxxxxxxxxxxxxxxx   # the 16-char app password (NO SPACES)
+```
+Once configured, Gmail will accept the App Password for SMTP and IMAPS authentication.
 
 ## License
 
