@@ -13,8 +13,8 @@ This example demonstrate how to
 1. Build the WAR using Maven `mvn install`
 2. Download a [CIB seven Distribution](https://cibseven.org/en/download/)
 3. Copy the WAR `cibseven-mail.example.pizza-${VERSION}.war` into the webapps / deployments folder
-4. Copy the JAR `cibseven-mail-core-${VERSION}.jar` into the application server lib folder (and make sure that the required dependencies are available - like JakartaMail) (e.g. tomcat folder: `server\apache-tomcat-8.0.24\lib`)
-5. Copy the mail configuration `src/main/resources/mail-configuration.properties` to application server config folder and adjust it (e.g. tomcat folder: `server\apache-tomcat-10.1.55\conf`)
+4. Copy the JAR `cibseven-mail-core-${VERSION}.jar` into the application server lib folder (and make sure that the required dependencies are available - like JakartaMail) (e.g. tomcat folder: `server\apache-tomcat-${TOMCAT.VERSION}\lib`)
+5. Copy the mail configuration `src/main/resources/mail-configuration.properties` to application server config folder and adjust it (e.g. tomcat folder: `server\apache-tomcat-${TOMCAT.VERSION}\conf`)
 6. Set the environment variable `MAIL_CONFIG` to the path where you copied the mail configuration
 7. Start the application server
 8. Send a mail which contains the pizza order as text body (i.e. pizza funghi)
@@ -24,7 +24,7 @@ This example demonstrate how to
 
 ### Run it as JUnit test
 
-You can also use the [ProcessIntegrationTest](src/test/java/org/camunda/bpm/extension/mail/example/ProcessIntegrationTest.java) to run the example as a JUnit test with an embedded process engine.
+You can also use the [ProcessIntegrationTest](src/test/java/org/cibseven/bpm/extension/mail/example/ProcessIntegrationTest.java) to run the example as a JUnit test with an embedded process engine.
 
 ## How it works
 

@@ -19,12 +19,12 @@ A community extension for CIB seven to integrate emails in a process and interac
 ## Install
 
 > Requirements:
-* CIB seven >= 2.0.0
+* CIB seven >= 2.2.0
 * Java 17
 
 ### For Spring Boot
 
-Read [these instructions](./extension/spring-boot).
+Read [these instructions](./extension/spring-boot/README.md).
 
 ### For Embedded Process Engine
 
@@ -44,7 +44,7 @@ Add `cibseven-mail-core-${VERSION}.jar` to your application server (e.g. `apache
 
 Also make sure that you included the following dependencies:
 
-* [cibseven-connect-core](http://mvnrepository.com/artifact/org.cibseven.connect/cibseven-connect-core) >= 2.0.0
+* [cibseven-connect-core](http://mvnrepository.com/artifact/org.cibseven.connect/cibseven-connect-core) >= 2.2.0
 * [JakartaMail](https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api) >= 2.1.2
 * [Eclipse Angus Mail](https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail) >= 2.0.2
 * [slf4j-api](http://mvnrepository.com/artifact/org.slf4j/slf4j-api) >= 2.0.11
@@ -53,7 +53,7 @@ If you use Wildfly, follow the [special instructions](docs/shared-process-engine
 
 ## How to use it?
 
-The extension is build on top of the [Connectors API](https://docs.cibseven.org/manual/latest/reference/connect/) and provide some connectors for interacting with emails. The connectors can be used inside a process as implementation of a service task and are referenced by id. Use the Camunda Modeler to configure it.
+The extension is build on top of the [Connectors API](https://docs.cibseven.org/manual/latest/reference/connect/) and provide some connectors for interacting with emails. The connectors can be used inside a process as implementation of a service task and are referenced by id. Use the CIB seven Modeler to configure it.
 
 ```xml
 <serviceTask id="sendMail" name="Send Mail Task">
@@ -87,7 +87,7 @@ Connector-Id: mail-send
 | fileNames       | List of String (path to files)         | no                    |
 | files           | Map of String to file process variable | no                    |
 
-The text or html body can also be generated from a template (e.g. using FreeMarker). See the [example](examples/pizza#send-a-mail).
+The text or html body can also be generated from a template (e.g. using FreeMarker). See the [example](examples/pizza/README.md#send-a-mail).
 
 ### Poll Mails
 
@@ -102,9 +102,9 @@ Connector-Id: mail-poll
 
 | Output parameter | Type                                                                                      |
 |------------------|-------------------------------------------------------------------------------------------|
-| mails            | List of [Mail](extension/core/src/main/java/org/camunda/bpm/extension/mail/dto/Mail.java) |
+| mails            | List of [Mail](extension/core/src/main/java/org/cibseven/bpm/extension/mail/dto/Mail.java) |
 
-If `download-attachments` is set to `true` then it stores the attachments of the mails in the folder which is provided by the configuration. The path of the stored attachments can be gotten from the [Attachment](extension/core/src/main/java/org/camunda/bpm/extension/mail/dto/Attachment.java)s of the [Mail](extension/core/src/main/java/org/camunda/bpm/extension/mail/dto/Mail.java).
+If `download-attachments` is set to `true` then it stores the attachments of the mails in the folder which is provided by the configuration. The path of the stored attachments can be gotten from the [Attachment](extension/core/src/main/java/org/cibseven/bpm/extension/mail/dto/Attachment.java)s of the [Mail](extension/core/src/main/java/org/cibseven/bpm/extension/mail/dto/Mail.java).
 
 By default, the polled mails are marked as read. If the property `mail.imaps.peek` is set to `true` then the mails are just polled and not marked as read.
 
@@ -127,7 +127,7 @@ Connector-Id: mail-delete
 
 ![icon](docs/mail-notification-icon.png)
 
-The extension provide the [MailNotificationService](extension/core/src/main/java/org/camunda/bpm/extension/mail/notification/MailNotificationService.java) to react on incoming mails (e.g. start a process instance or correlate a message). You can register handlers / consumers which are invoked when a new mail is received.
+The extension provide the [MailNotificationService](extension/core/src/main/java/org/cibseven/bpm/extension/mail/notification/MailNotificationService.java) to react on incoming mails (e.g. start a process instance or correlate a message). You can register handlers / consumers which are invoked when a new mail is received.
 
 ```java
 MailNotificationService notificationService = new MailNotificationService(configuration);
@@ -145,7 +145,7 @@ notificationService.stop();
 
 ```
 
-If you use a mail handler and enabled `downloadAttachments` in the configuration then it stores the attachments of the mail before invoking the handler. Otherwise, you can also trigger the download manual by calling [Mail.downloadAttachments()](extension/core/src/main/java/org/camunda/bpm/extension/mail/dto/Mail.java).
+If you use a mail handler and enabled `downloadAttachments` in the configuration then it stores the attachments of the mail before invoking the handler. Otherwise, you can also trigger the download manual by calling [Mail.downloadAttachments()](extension/core/src/main/java/org/cibseven/bpm/extension/mail/dto/Mail.java).
 
 ## How to configure it?
 
@@ -158,11 +158,9 @@ An example configuration can look like:
 mail.transport.protocol=smtp
 
 mail.smtp.host=smtp.gmail.com
-mail.smtp.port=465
+mail.smtp.port=587
 mail.smtp.auth=true
-mail.smtp.ssl.enable=true
-mail.smtp.socketFactory.port=465
-mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+mail.smtp.starttls.enable=true
 
 # poll mails via IMAPS
 mail.store.protocol=imaps
@@ -187,7 +185,7 @@ mail.user=USER@gmail.com
 mail.password=PASSWORD
 ```
 
-You can find some sample configurations at [extension/core/configs](extension/core/configs). If you use a mail provider which has no configuration yet, feel free to add one. You can verify your configuration with the [integration tests](extension/core/src/test/java/org/camunda/bpm/extension/mail/integration/MailProviderIntegrationTest.java).
+You can find some sample configurations at [extension/core/configs](extension/core/configs). If you use a mail provider which has no configuration yet, feel free to add one. You can verify your configuration with the [integration tests](extension/core/src/test/java/org/cibseven/bpm/extension/mail/integration/MailProviderIntegrationTest.java).
 
 ### Alternative Configuration
 
@@ -247,7 +245,7 @@ However, supporting Helm deployment is easily done by following:
 
 Depends on the input of the community. Some ideas:
 
-* provide element templates for camunda modeler (not supported yet)
+* provide element templates for CIB seven modeler (not supported yet)
 * integration of file process variables
 * spring-based configuration
 

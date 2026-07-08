@@ -7,7 +7,7 @@ The plugin configures the connectors for sending, polling, and deleting e-mails 
 
 This plugin can be used with CIB seven Run.
 
-1. Add the `cibseven-mail-extension-run-${VERSION}.jar`to the `configuration/userlib`folder.
+1. Add the `cibseven-mail-extension-run-${VERSION}.jar` to the `configuration/userlib` folder.
 
 2. Configure the plugin.
 
