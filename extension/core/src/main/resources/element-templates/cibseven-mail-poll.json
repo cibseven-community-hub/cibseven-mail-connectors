@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
   "name": "CIB seven - Mail Poll",
-  "id": "org.cibseven.bpm.extension.mail.poll",
+  "id": "org.cibseven.community.mail.poll",
   "version": 1,
   "description": "Poll e-mails from a folder via the CIB seven mail connector (connectorId: mail-poll). IMAP settings come from MAIL_CONFIG.",
   "icon": {

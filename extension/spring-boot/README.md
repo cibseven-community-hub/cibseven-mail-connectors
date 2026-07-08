@@ -10,13 +10,13 @@ This plugin can be used with CIB seven Spring Boot Starter.
 1. Add the corresponding dependencies:
    ```xml
    <dependency>
-     <groupId>org.cibseven.bpm.extension</groupId>
+     <groupId>org.cibseven.community</groupId>
      <artifactId>cibseven-mail-spring-boot-starter</artifactId>
      <version>${version.cibseven-mail}</version>
    </dependency>
    ```
 2.
-   The `cibseven-mail-spring-boot-starter` only registers the connectors; it does not register this plugin nor bring connect-core onto the runtime classpath. 
+   The `cibseven-mail-spring-boot-starter` only registers the connectors; it does not register this plugin nor bring connect-core onto the runtime classpath.
    The `cibseven-engine-plugin-connect` is required so the engine can parse
    `<camunda:connector>` service tasks (mail-poll / mail-send / mail-delete).
    ```xml

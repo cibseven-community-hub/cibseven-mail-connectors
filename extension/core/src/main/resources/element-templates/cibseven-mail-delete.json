@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
   "name": "CIB seven - Mail Delete",
-  "id": "org.cibseven.bpm.extension.mail.delete",
+  "id": "org.cibseven.community.mail.delete",
   "version": 1,
   "description": "Delete e-mails from a folder via the CIB seven mail connector (connectorId: mail-delete). IMAP settings come from MAIL_CONFIG.",
   "icon": {

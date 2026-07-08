@@ -32,7 +32,7 @@ Add `cibseven-mail-core` as dependency to your application. Using Maven, you hav
 
 ```xml
 <dependency>
-  <groupId>org.cibseven.bpm.extension</groupId>
+  <groupId>org.cibseven.community</groupId>
   <artifactId>cibseven-mail-core</artifactId>
   <version>2.2.0</version>
 </dependency>

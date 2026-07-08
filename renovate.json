@@ -5,7 +5,7 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchPackagePrefixes": ["org.cibseven.bpm.extension"],
+      "matchPackagePrefixes": ["org.cibseven.community"],
       "enabled": false
     },
     {
