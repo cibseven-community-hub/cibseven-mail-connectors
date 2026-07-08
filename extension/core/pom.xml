@@ -14,6 +14,7 @@
 
   <dependencies>
 
+    <!-- Both deps managed by the Spring Boot dependencies BOM -->
     <dependency>
       <groupId>jakarta.mail</groupId>
       <artifactId>jakarta.mail-api</artifactId>
