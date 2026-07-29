@@ -4,7 +4,7 @@ Tested with CIB seven version 2.2.0 running on WildFly Full 40.0.0.Final
 
 1. Create a module for cibseven-mail-core:
 
-    Copy the jar into `\server\wildfly-${WILDFLY_VERSION}.Final\modules\org\cibseven\bpm\extension\cibseven-mail-core\main` and add a `module.xml` with following content:
+    Copy the jar into `\server\wildfly-${WILDFLY_VERSION}.Final\modules\org\cibseven\community\cibseven-mail-core\main` and add a `module.xml` with following content:
   
     ```
     <module xmlns="urn:jboss:module:1.0" name="org.cibseven.community.cibseven-mail-core">
@@ -51,5 +51,5 @@ Tested with CIB seven version 2.2.0 running on WildFly Full 40.0.0.Final
     <module name="org.cibseven.community.cibseven-mail-core" services="import" />
     ```
   
-5. An easy way to configure the connection is to copy the `mail-config.properties` into the `\server\wildfly-${WILDFLY_VERSION}.Final\standalone\config` folder and add an environment variable `MAIL_CONFIG` that points to the file. 
+5. An easy way to configure the connection is to copy the `mail-config.properties` into the `\server\wildfly-${WILDFLY_VERSION}.Final\standalone\configuration` folder and add an environment variable `MAIL_CONFIG` that points to the file. 
 Alternative you can configure the Wildfly `Mail Subsystem` and mail session and acquire it over jndi.  Have a look at the configuration section for further details.
