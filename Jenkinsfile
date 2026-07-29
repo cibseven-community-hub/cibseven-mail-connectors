@@ -99,9 +99,7 @@ pipeline {
                 script {
                     withMaven(options: [junitPublisher(disabled: false), jacocoPublisher(disabled: false)]) {
                         sh "mvn -T4 -Dbuild.number=${BUILD_NUMBER} install"
-                    }
-                    if (!params.DEPLOY_TO_ARTIFACTS && !params.DEPLOY_TO_MAVEN_CENTRAL) {
-                        junit allowEmptyResults: true, testResults: ConstantsInternal.MAVEN_TEST_RESULTS
+                        sanitizeSurefireReports()
                     }
                 }
             }
@@ -118,9 +116,8 @@ pipeline {
                 script {
                     withMaven(options: []) {
                         sh "mvn -T4 -U clean deploy"
+                        sanitizeSurefireReports()
                     }
-
-                    junit allowEmptyResults: true, testResults: ConstantsInternal.MAVEN_TEST_RESULTS
                 }
             }
         }
@@ -150,9 +147,9 @@ pipeline {
                                     -Dskip.cibseven.release="${!params.DEPLOY_TO_ARTIFACTS}"
                             """
                         }
-                    }
 
-                    junit allowEmptyResults: true, testResults: ConstantsInternal.MAVEN_TEST_RESULTS
+                        sanitizeSurefireReports()
+                    }
                 }
             }
         }
@@ -207,4 +204,22 @@ pipeline {
             }
         }
     }
+}
+
+/**
+ * Strips control characters from the surefire/failsafe XML reports.
+ *
+ * The mail tests capture protocol traffic on stdout, and surefire embeds that
+ * stdout in <system-out> of its XML reports. A single control byte in there makes
+ * Jenkins' JUnit publisher fail with "com.thoughtworks.xstream.io.StreamException:
+ * Invalid character 0x0 in XML stream" while persisting build.xml, which aborts the
+ * whole build. Must run inside the withMaven block, as its JUnit publisher fires
+ * when the block closes.
+ */
+def sanitizeSurefireReports() {
+    sh '''
+        find . -path '*/surefire-reports/TEST-*.xml' -o -path '*/failsafe-reports/TEST-*.xml' | while read -r report; do
+            tr -d '\\000-\\010\\013\\014\\016-\\037' < "$report" > "$report.sanitized" && mv "$report.sanitized" "$report"
+        done
+    '''
 }
