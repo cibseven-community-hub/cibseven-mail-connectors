@@ -9,7 +9,17 @@ This plugin can be used with CIB seven Run.
 
 1. Add the `cibseven-mail-extension-run-${VERSION}.jar` to the `configuration/userlib` folder.
 
+    _There is no need to add  `cibseven-connect-core-${VERSION}.jar` or `cibseven-engine-plugin-connect-${VERSION}.jar`, since both are already embedded in `internal/cibseven-bpm-run-core.jar`._
+
 2. Configure the plugin.
+    ```yaml
+    camunda.bpm.run:
+        process-engine-plugins:
+        - plugin-class: org.cibseven.connect.plugin.impl.ConnectProcessEnginePlugin
+
+    ```
+
+3. If using FreeMarker, add `cibseven-template-engines-freemarker-${VERSION}.jar` and the FreeMarker jar to the `configuration/userlib` folder.
 
 ## How to Use it?
 
