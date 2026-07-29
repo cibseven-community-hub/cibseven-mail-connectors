@@ -21,3 +21,4 @@ faces-config.NavData
 *.DS_Store
 
 src/test/resources/mail.properties
+extension/core/src/main/resources/element-templates/*.json
