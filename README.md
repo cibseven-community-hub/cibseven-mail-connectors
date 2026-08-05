@@ -41,7 +41,7 @@ Add `cibseven-mail-core` as dependency to your application. Using Maven, you hav
 ### For Shared Process Engine
 
 #### Tomcat
-Add `cibseven-mail-core-${VERSION}.jar` to your application server (e.g. `apache-tomcat-10.1.55\lib`).
+Add `cibseven-mail-core-${VERSION}.jar` to your application server (e.g. `apache-tomcat-${TOMCAT_VERSION}\lib`).
 
 Also make sure that you included the following dependencies:
 
@@ -50,6 +50,7 @@ Also make sure that you included the following dependencies:
 * [Eclipse Angus Mail](https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail) >= 2.0.2
 * [Eclipse Angus Activation](https://mvnrepository.com/artifact/org.eclipse.angus/angus-activation) >= 2.0.3
 
+Place `mail-config.properties` in Tomcat's `lib` directory (`apache-tomcat-${TOMCAT_VERSION}/lib`), which is part of the common classpath.
 
 #### Wildfly
 If you use Wildfly, follow the [special instructions](docs/shared-process-engine-wildfly.md).
