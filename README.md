@@ -40,15 +40,18 @@ Add `cibseven-mail-core` as dependency to your application. Using Maven, you hav
 
 ### For Shared Process Engine
 
+#### Tomcat
 Add `cibseven-mail-core-${VERSION}.jar` to your application server (e.g. `apache-tomcat-10.1.55\lib`).
 
 Also make sure that you included the following dependencies:
 
-* [cibseven-connect-core](http://mvnrepository.com/artifact/org.cibseven.connect/cibseven-connect-core) >= 2.2.0
-* [JakartaMail](https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api) >= 2.1.2
+* [JakartaMail](https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api) >= 2.1.0
+* [Jakarta Activation API](https://mvnrepository.com/artifact/jakarta.activation/jakarta.activation-api) >= 2.1.4
 * [Eclipse Angus Mail](https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail) >= 2.0.2
-* [slf4j-api](http://mvnrepository.com/artifact/org.slf4j/slf4j-api) >= 2.0.11
+* [Eclipse Angus Activation](https://mvnrepository.com/artifact/org.eclipse.angus/angus-activation) >= 2.0.3
 
+
+#### Wildfly
 If you use Wildfly, follow the [special instructions](docs/shared-process-engine-wildfly.md).
 
 ## How to use it?
