@@ -356,8 +356,11 @@ public class PollMailConnectorTest {
     PollMailConnector connector = new PollMailConnector();
 
     try {
-      assertThrows(
-          MailConnectorException.class, () -> connector.createRequest().folder("INBOX").execute());
+      MailConnectorException ex =
+          assertThrows(
+              MailConnectorException.class,
+              () -> connector.createRequest().folder("INBOX").execute());
+      assertThat(ex.getCause()).isSameAs(cause);
     } finally {
       MailServiceFactory.getInstance().set(null);
     }
