@@ -2,7 +2,7 @@
 
 
 [![CIB seven 2.2.0](https://img.shields.io/badge/CIB%20seven-2.2.0-orange.svg)](https://docs.cibseven.org/manual/2.2/)
-[![Maven Central](https://img.shields.io/maven-central/v/org.cibseven.community.data/cibseven-mail?label=Maven%20Central)](https://central.sonatype.com/artifact/org.cibseven.community.data/cibseven-mail)
+[![Maven Central](https://img.shields.io/maven-central/v/org.cibseven.community.mail/cibseven-mail-core?label=Maven%20Central)](https://central.sonatype.com/artifact/org.cibseven.community.mail/cibseven-mail-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A community extension for CIB seven to integrate emails in a process and interact with them.
@@ -32,7 +32,7 @@ Add `cibseven-mail-core` as dependency to your application. Using Maven, you hav
 
 ```xml
 <dependency>
-  <groupId>org.cibseven.community</groupId>
+  <groupId>org.cibseven.community.mail</groupId>
   <artifactId>cibseven-mail-core</artifactId>
   <version>2.2.0</version>
 </dependency>

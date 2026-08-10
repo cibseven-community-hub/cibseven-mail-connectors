@@ -7,7 +7,7 @@ Tested with CIB seven version 2.2.0 running on WildFly Full 40.0.0.Final
     Copy the jar into `\server\wildfly-${WILDFLY_VERSION}.Final\modules\org\cibseven\community\cibseven-mail-core\main` and add a `module.xml` with following content:
   
     ```
-    <module xmlns="urn:jboss:module:1.0" name="org.cibseven.community.cibseven-mail-core">
+    <module xmlns="urn:jboss:module:1.0" name="org.cibseven.community.mail.cibseven-mail-core">
       <resources>
         <resource-root path="cibseven-mail-core-${VERSION}.jar" />
       </resources>
@@ -41,14 +41,14 @@ Tested with CIB seven version 2.2.0 running on WildFly Full 40.0.0.Final
     Change the `module.xml` in `\server\wildfly-${WILDFLY_VERSION}.Final\modules\org\cibseven\bpm\cibseven-engine-plugin-connect\main` and add the line
   
     ```
-    <module name="org.cibseven.community.cibseven-mail-core" services="import" />
+    <module name="org.cibseven.community.mail.cibseven-mail-core" services="import" />
     ```
 4. Import the mail module in the cibseven-engine module:
 
     Change the `module.xml` in `\server\wildfly-${WILDFLY_VERSION}.Final\modules\org\cibseven\bpm\cibseven-engine\main` and add the line
   
     ```
-    <module name="org.cibseven.community.cibseven-mail-core" services="import" />
+    <module name="org.cibseven.community.mail.cibseven-mail-core" services="import" />
     ```
   
 5. An easy way to configure the connection is to copy the `mail-config.properties` into the `\server\wildfly-${WILDFLY_VERSION}.Final\standalone\configuration` folder and add an environment variable `MAIL_CONFIG` that points to the file. 
