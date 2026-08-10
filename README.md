@@ -249,7 +249,6 @@ However, supporting Helm deployment is easily done by following:
 
 Depends on the input of the community. Some ideas:
 
-* provide element templates for CIB seven modeler (not supported yet)
 * integration of file process variables
 * spring-based configuration
 
