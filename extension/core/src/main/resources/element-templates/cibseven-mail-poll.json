@@ -27,7 +27,7 @@
       "id": "output",
       "label": "Output mapping"
     }
-  ],  
+  ],
   "properties": [],
   "scopes": [
     {
@@ -44,21 +44,45 @@
         {
           "label": "Folder",
           "group": "request",
-          "description": "Mailbox folder to read from.",
+          "description": "Mailbox folder to read from. Clear this field to fall back to 'mail.poll.folder' from MAIL_CONFIG.",
           "type": "String",
           "value": "INBOX",
+          "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "folder"
-          },
-          "constraints": {
-            "notEmpty": true
           }
+        },
+        {
+          "label": "Download attachments",
+          "group": "request",
+          "description": "Whether attachment content is downloaded with each mail. Leave on the MAIL_CONFIG default to use 'mail.attachment.download'. The values are expressions on purpose: a literal 'true' would reach the connector as a String and fail.",
+          "type": "Dropdown",
+          "value": "",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "download-attachments"
+          },
+          "choices": [
+            {
+              "name": "Use MAIL_CONFIG default",
+              "value": ""
+            },
+            {
+              "name": "Yes",
+              "value": "${true}"
+            },
+            {
+              "name": "No",
+              "value": "${false}"
+            }
+          ]
         },
         {
           "label": "Mails -> variable",
           "group": "output",
-          "description": "Process variable that receives the list of polled mails.",
+          "description": "Process variable that receives the list of polled mails (List<Mail>).",
           "type": "String",
           "value": "mails",
           "binding": {

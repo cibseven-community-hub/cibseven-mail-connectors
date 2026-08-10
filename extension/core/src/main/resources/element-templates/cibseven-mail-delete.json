@@ -22,7 +22,7 @@
       "id": "request",
       "label": "Delete"
     }
-  ],  
+  ],
   "properties": [],
   "scopes": [
     {
@@ -39,48 +39,64 @@
         {
           "label": "Folder",
           "group": "request",
-          "description": "Mailbox folder to delete from.",
+          "description": "Mailbox folder to delete from. Clear this field to fall back to 'mail.poll.folder' from MAIL_CONFIG.",
           "type": "String",
           "value": "INBOX",
+          "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "folder"
-          },
-          "constraints": {
-            "notEmpty": true
           }
         },
         {
           "label": "Message IDs",
           "group": "request",
-          "description": "Provide exactly ONE selector (Message IDs, Message numbers, or Mails). Expression resolving to the RFC Message-ID(s) to delete, e.g. ${messageIds}.",
+          "description": "Provide exactly ONE selector (Message IDs, Message numbers, or Mails). Must be an expression resolving to a list of RFC Message-IDs (List<String>), e.g. ${messageIds}. A literal value is rejected by the connector at runtime.",
           "type": "String",
           "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "messageIds"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a List<String>, e.g. ${messageIds}"
+            }
           }
         },
         {
           "label": "Message numbers",
           "group": "request",
-          "description": "Alternative selector. Expression resolving to the message number(s) within the folder.",
+          "description": "Alternative selector. Must be an expression resolving to a list of message numbers within the folder (List<Integer>), e.g. ${messageNumbers}. Strings are not converted - the connector casts to Integer.",
           "type": "String",
           "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "messageNumbers"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a List<Integer>, e.g. ${messageNumbers}"
+            }
           }
         },
         {
           "label": "Mails",
           "group": "request",
-          "description": "Alternative selector. Expression resolving to the list of mails to delete, e.g. ${mails} returned by a Mail Poll task.",
+          "description": "Alternative selector. Must be an expression resolving to the list of mails to delete (List<Mail>), e.g. ${mails} as returned by a Mail Poll task.",
           "type": "String",
           "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "mails"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a List<Mail>, e.g. ${mails}"
+            }
           }
         }
       ]

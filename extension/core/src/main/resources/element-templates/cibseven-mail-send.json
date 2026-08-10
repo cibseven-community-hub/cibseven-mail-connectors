@@ -47,7 +47,7 @@
         {
           "label": "From",
           "group": "recipients",
-          "description": "Sender address. Optional \u2013 falls back to the 'sender' configured in MAIL_CONFIG if left empty.",
+          "description": "Sender address. Optional – falls back to the 'sender' configured in MAIL_CONFIG if left empty.",
           "type": "String",
           "optional": true,
           "binding": {
@@ -58,7 +58,7 @@
         {
           "label": "From alias",
           "group": "recipients",
-          "description": "Display name shown for the sender, e.g. \"Support Team\".",
+          "description": "Display name shown for the sender, e.g. \"Support Team\". Falls back to 'sender.alias' from MAIL_CONFIG.",
           "type": "String",
           "optional": true,
           "binding": {
@@ -82,6 +82,7 @@
         {
           "label": "Cc",
           "group": "recipients",
+          "description": "Optional. Comma-separated address(es) or an expression.",
           "type": "String",
           "optional": true,
           "binding": {
@@ -92,6 +93,7 @@
         {
           "label": "Bcc",
           "group": "recipients",
+          "description": "Optional. Comma-separated address(es) or an expression.",
           "type": "String",
           "optional": true,
           "binding": {
@@ -112,14 +114,56 @@
           }
         },
         {
+          "id": "bodyFormat",
+          "label": "Text body format",
+          "group": "content",
+          "description": "How the text body is rendered. 'Plain' lets the engine resolve ${...} as a JUEL expression. 'FreeMarker template' writes the body as a camunda:script and supports full FreeMarker syntax (<#if>, <#list>, ...) - it requires a FreeMarker template engine on the classpath. This field is a modeler-only switch; the connector ignores it.",
+          "type": "Dropdown",
+          "value": "plain",
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "_bodyFormat"
+          },
+          "choices": [
+            {
+              "name": "Plain text / JUEL expressions",
+              "value": "plain"
+            },
+            {
+              "name": "FreeMarker template",
+              "value": "freemarker"
+            }
+          ]
+        },
+        {
           "label": "Text body",
           "group": "content",
-          "description": "Plain-text body. Provide a text body and/or an HTML body. Supports a FreeMarker template when the freemarker template engine is on the classpath.",
+          "description": "Plain-text body. Provide a text body and/or an HTML body. ${...} is resolved by the engine as a JUEL expression.",
           "type": "Text",
           "optional": true,
+          "condition": {
+            "property": "bodyFormat",
+            "equals": "plain"
+          },
           "binding": {
             "type": "camunda:inputParameter",
             "name": "text"
+          }
+        },
+        {
+          "label": "Text body (FreeMarker)",
+          "group": "content",
+          "description": "Plain-text body rendered by FreeMarker before the mail is built. Full FreeMarker syntax is available; process variables are the data model.",
+          "type": "Text",
+          "optional": true,
+          "condition": {
+            "property": "bodyFormat",
+            "equals": "freemarker"
+          },
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "text",
+            "scriptFormat": "freemarker"
           }
         },
         {
@@ -136,23 +180,35 @@
         {
           "label": "File names",
           "group": "attachments",
-          "description": "Optional. Expression resolving to the attachment file name(s)/path(s), e.g. ${attachmentNames}.",
+          "description": "Optional. Attachments read from the file system OF THE ENGINE (server-local absolute paths). Must be an expression resolving to List<String>, e.g. ${attachmentPaths}.",
           "type": "String",
           "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "fileNames"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a List<String> of server-local paths, e.g. ${attachmentPaths}"
+            }
           }
         },
         {
           "label": "Files",
           "group": "attachments",
-          "description": "Optional. Expression resolving to the attachment content as process variables (FileValue / typed values), e.g. ${attachments}.",
+          "description": "Optional. Attachments passed as content. Must be an expression resolving to a Map keyed by attachment file name, e.g. ${attachments} where the map values are the file contents (byte streams / file variables).",
           "type": "String",
           "optional": true,
           "binding": {
             "type": "camunda:inputParameter",
             "name": "files"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a Map<String, content>, e.g. ${attachments}"
+            }
           }
         }
       ]
