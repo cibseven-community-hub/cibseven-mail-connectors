@@ -1,22 +1,43 @@
-# Camunda-platform-7-mail Starter for Spring Boot
+# Cibseven-mail Starter for Spring Boot
 
-This starter wraps the camunda-platform-7-mail community connector and is intended to be used with camunda spring-boot.
+This starter wraps the cibseven-mail community connector and is intended to be used with CIB seven Spring Boot.
 The plugin configures the connectors for sending, polling, and deleting e-mails based on the YAML/Properties file used for configuring your spring boot app, and registers the connectors upon startup.
 
 ## Install
 
-This plugin can be used with Camunda 7 Spring Boot Starter.
+This plugin can be used with CIB seven Spring Boot Starter.
 
-1. Add the dependency:
+1. Add the corresponding dependencies:
    ```xml
    <dependency>
-     <groupId>org.camunda.bpm.extension</groupId>
-     <artifactId>camunda-bpm-mail-spring-boot-starter</artifactId>
-     <version>${version.camunda-bpm-mail}</version>
+     <groupId>org.cibseven.community</groupId>
+     <artifactId>cibseven-mail-spring-boot-starter</artifactId>
+     <version>${version.cibseven-mail}</version>
    </dependency>
    ```
+2.
+   The `cibseven-mail-spring-boot-starter` only registers the connectors; it does not register this plugin nor bring connect-core onto the runtime classpath.
+   The `cibseven-engine-plugin-connect` is required so the engine can parse
+   `<camunda:connector>` service tasks (mail-poll / mail-send / mail-delete).
+   ```xml
+    <dependency>
+        <groupId>org.cibseven.bpm</groupId>
+        <artifactId>cibseven-engine-plugin-connect</artifactId>
+        <version>${cibseven.version}</version>
+    </dependency>
+    ```
+   Also, instantiate the `ConnectProcessEnginePlugin` as a Spring Bean. This can be done by creating a configuration class like this:
+    ```java
+    @Configuration
+    public class ConnectPluginConfiguration {
 
-2. Configure the connector.
+      @Bean
+      public ConnectProcessEnginePlugin connectProcessEnginePlugin() {
+        return new ConnectProcessEnginePlugin();
+      }
+    }
+    ```
+3. Configure the connector.
 
 ## How to Use it?
 
@@ -49,12 +70,9 @@ camunda.bpm.plugin.mail:
 
   smtp:
     host: smtp.gcom
-    port: 465
+    port: 587
     auth: true
-    ssl.enable: true
-    socketFactory:
-      port: 465
-      class: javax.net.ssl.SSLSocketFactory
+    starttls.enable: true
 
   # poll mails via IMAPS
   store.protocol: imaps
@@ -77,5 +95,5 @@ camunda.bpm.plugin.mail:
 
   # credentials
   user: USER@gcom
-  password: PASSWORD
+  password: APP_PASSWORD
 ```

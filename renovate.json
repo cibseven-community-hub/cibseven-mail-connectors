@@ -5,7 +5,7 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchPackagePrefixes": ["org.camunda.bpm.extension"],
+      "matchPackagePrefixes": ["org.cibseven.community"],
       "enabled": false
     },
     {

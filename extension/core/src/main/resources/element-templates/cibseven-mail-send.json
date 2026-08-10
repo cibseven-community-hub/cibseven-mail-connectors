@@ -1,0 +1,217 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
+  "name": "CIB seven - Mail Send",
+  "id": "org.cibseven.community.mail.send",
+  "version": 1,
+  "description": "Send an e-mail from a Service Task via the CIB seven mail connector (connectorId: mail-send). SMTP settings come from MAIL_CONFIG.",
+  "icon": {
+    "contents": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExIDE4QzExIDE3LjY2IDExLjA0IDE3LjMzIDExLjA5IDE3SDRWN0wxMiAxMkwyMCA3VjEyLjA5QzIwLjcyIDEyLjIxIDIxLjUgMTIuNSAyMiAxM1Y1QzIyIDMuOSAyMS4xIDMgMjAgM0g0QzIuOSAzIDIgMy45IDIgNVYxN0MyIDE4LjEgMi45IDE5IDQgMTlIMTEuMDlDMTEuMDQgMTguNjcgMTEgMTguMzQgMTEgMThaTTIwIDVMMTIgMTBMNCA1SDIwWiIgZmlsbD0iIzRENjI3OCIvPgo8cGF0aCBkPSJNMTMgMThDMTMgMTUuMjM4NiAxNS4yMzg2IDEzIDE4IDEzQzIwLjc2MTQgMTMgMjMgMTUuMjM4NiAyMyAxOEMyMyAyMC43NjE0IDIwLjc2MTQgMjMgMTggMjNDMTUuMjM4NiAyMyAxMyAyMC43NjE0IDEzIDE4Wk0xOCAxOUwxNy45ODczIDIxTDIxLjAwNTkgMTguMDE5NUwxOC4wMjU0IDE1TDE4LjAxMjcgMTdMMTUuMDEyNyAxNi45NzQ2TDE1IDE4Ljk3NDZMMTggMTlaIiBmaWxsPSIjNEQ2Mjc4Ii8+Cjwvc3ZnPgo="
+  },
+  "keywords": [
+    "mail",
+    "email",
+    "smtp",
+    "send",
+    "connector"
+  ],
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "groups": [
+    {
+      "id": "recipients",
+      "label": "Addresses"
+    },
+    {
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "id": "attachments",
+      "label": "Attachments"
+    }
+  ],
+  "properties": [],
+  "scopes": [
+    {
+      "type": "camunda:Connector",
+      "properties": [
+        {
+          "type": "Hidden",
+          "value": "mail-send",
+          "binding": {
+            "type": "property",
+            "name": "connectorId"
+          }
+        },
+        {
+          "label": "From",
+          "group": "recipients",
+          "description": "Sender address. Optional – falls back to the 'sender' configured in MAIL_CONFIG if left empty.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "from"
+          }
+        },
+        {
+          "label": "From alias",
+          "group": "recipients",
+          "description": "Display name shown for the sender, e.g. \"Support Team\". Falls back to 'sender.alias' from MAIL_CONFIG.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "fromAlias"
+          }
+        },
+        {
+          "label": "To",
+          "group": "recipients",
+          "description": "Recipient address(es). Comma-separated, or an expression resolving to the addresses, e.g. ${customerEmail}.",
+          "type": "String",
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "to"
+          },
+          "constraints": {
+            "notEmpty": true
+          }
+        },
+        {
+          "label": "Cc",
+          "group": "recipients",
+          "description": "Optional. Comma-separated address(es) or an expression.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "cc"
+          }
+        },
+        {
+          "label": "Bcc",
+          "group": "recipients",
+          "description": "Optional. Comma-separated address(es) or an expression.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "bcc"
+          }
+        },
+        {
+          "label": "Subject",
+          "group": "content",
+          "type": "String",
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "subject"
+          },
+          "constraints": {
+            "notEmpty": true
+          }
+        },
+        {
+          "id": "bodyFormat",
+          "label": "Text body format",
+          "group": "content",
+          "description": "How the text body is rendered. 'Plain' lets the engine resolve ${...} as a JUEL expression. 'FreeMarker template' writes the body as a camunda:script and supports full FreeMarker syntax (<#if>, <#list>, ...) - it requires a FreeMarker template engine on the classpath. This field is a modeler-only switch; the connector ignores it.",
+          "type": "Dropdown",
+          "value": "plain",
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "_bodyFormat"
+          },
+          "choices": [
+            {
+              "name": "Plain text / JUEL expressions",
+              "value": "plain"
+            },
+            {
+              "name": "FreeMarker template",
+              "value": "freemarker"
+            }
+          ]
+        },
+        {
+          "label": "Text body",
+          "group": "content",
+          "description": "Plain-text body. Provide a text body and/or an HTML body. ${...} is resolved by the engine as a JUEL expression.",
+          "type": "Text",
+          "optional": true,
+          "condition": {
+            "property": "bodyFormat",
+            "equals": "plain"
+          },
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "text"
+          }
+        },
+        {
+          "label": "Text body (FreeMarker)",
+          "group": "content",
+          "description": "Plain-text body rendered by FreeMarker before the mail is built. Full FreeMarker syntax is available; process variables are the data model.",
+          "type": "Text",
+          "optional": true,
+          "condition": {
+            "property": "bodyFormat",
+            "equals": "freemarker"
+          },
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "text",
+            "scriptFormat": "freemarker"
+          }
+        },
+        {
+          "label": "HTML body",
+          "group": "content",
+          "description": "HTML body. Provide a text body and/or an HTML body.",
+          "type": "Text",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "html"
+          }
+        },
+        {
+          "label": "File names",
+          "group": "attachments",
+          "description": "Optional. Attachments read from the file system OF THE ENGINE (server-local absolute paths). Must be an expression resolving to List<String>, e.g. ${attachmentPaths}.",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "fileNames"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a List<String> of server-local paths, e.g. ${attachmentPaths}"
+            }
+          }
+        },
+        {
+          "label": "Files",
+          "group": "attachments",
+          "description": "Optional. Attachments passed as content. Must be an expression resolving to a Map keyed by attachment file name, e.g. ${attachments} where the map values are the file contents (byte streams / file variables).",
+          "type": "String",
+          "optional": true,
+          "binding": {
+            "type": "camunda:inputParameter",
+            "name": "files"
+          },
+          "constraints": {
+            "pattern": {
+              "value": "^$|^\\$\\{.*\\}$",
+              "message": "must be an expression resolving to a Map<String, content>, e.g. ${attachments}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+org.cibseven.community.mail.send.SendMailProvider
+org.cibseven.community.mail.poll.PollMailProvider
+org.cibseven.community.mail.delete.DeleteMailProvider
