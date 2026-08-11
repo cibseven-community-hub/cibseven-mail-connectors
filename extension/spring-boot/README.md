@@ -10,7 +10,7 @@ This plugin can be used with CIB seven Spring Boot Starter.
 1. Add the corresponding dependencies:
    ```xml
    <dependency>
-     <groupId>org.cibseven.community</groupId>
+     <groupId>org.cibseven.community.mail</groupId>
      <artifactId>cibseven-mail-spring-boot-starter</artifactId>
      <version>${version.cibseven-mail}</version>
    </dependency>

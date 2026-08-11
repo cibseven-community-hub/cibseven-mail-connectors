@@ -9,7 +9,7 @@
     <relativePath />
   </parent>
 
-  <groupId>org.cibseven.community</groupId>
+  <groupId>org.cibseven.community.mail</groupId>
   <artifactId>cibseven-mail-root</artifactId>
   <version>2.2.0</version>
   <packaging>pom</packaging>
@@ -24,7 +24,7 @@
     <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
     <!-- versions -->
     <version.cibseven>2.2.0</version.cibseven>
-    <version.springBoot>3.5.15</version.springBoot>
+    <version.springBoot>4.0.6</version.springBoot>
     <!-- tests -->
     <version.greenmail>2.1.9</version.greenmail>
     <!-- maven plugins (not managed by parent) -->
@@ -78,12 +78,12 @@
       </dependency>
       <!-- modules -->
       <dependency>
-        <groupId>org.cibseven.community</groupId>
+        <groupId>org.cibseven.community.mail</groupId>
         <artifactId>cibseven-mail-core</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.cibseven.community</groupId>
+        <groupId>org.cibseven.community.mail</groupId>
         <artifactId>cibseven-mail-spring-boot-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
