@@ -21,40 +21,6 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>empty-javadoc-jar</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <classifier>javadoc</classifier>
-              <classesDirectory>${basedir}/javadoc</classesDirectory>
-            </configuration>
-          </execution>
-          <!--
-            This module has no sources of its own, so maven-source-plugin creates no
-            sources jar ("No sources in project. Archive not created."). Maven Central
-            rejects the artifact without one, so attach an empty jar, same as the
-            javadoc one above.
-          -->
-          <execution>
-            <id>empty-sources-jar</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <classifier>sources</classifier>
-              <classesDirectory>${basedir}/sources</classesDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <additionalDependencies>
@@ -89,4 +55,54 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <!--
+        This module has no sources of its own, so maven-source-plugin and
+        maven-javadoc-plugin produce nothing ("No sources in project. Archive not
+        created."). Maven Central rejects an artifact without both, so on a release we
+        attach empty jars instead. Activated by -DemptyJavadocAndSourcesForRun from the Maven
+        Central stage in the Jenkinsfile, which only runs for non-SNAPSHOT versions.
+      -->
+      <id>empty-javadoc-and-sources</id>
+      <activation>
+        <property>
+          <name>emptyJavadocAndSourcesForRun</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>empty-javadoc-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <classifier>javadoc</classifier>
+                  <classesDirectory>${basedir}/javadoc</classesDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>empty-sources-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <classifier>sources</classifier>
+                  <classesDirectory>${basedir}/sources</classesDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -144,6 +144,7 @@ pipeline {
                                     clean deploy \
                                     -Psonatype-oss-release,release \
                                     -DskipExamples \
+                                    -DemptyJavadocAndSourcesForRun \
                                     -Dskip.cibseven.release="${!params.DEPLOY_TO_ARTIFACTS}"
                             """
                         }
