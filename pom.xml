@@ -11,7 +11,7 @@
 
   <groupId>org.cibseven.community.mail</groupId>
   <artifactId>cibseven-mail-root</artifactId>
-  <version>2.2.0</version>
+  <version>2.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>CIB seven Mail</name>
 
@@ -23,7 +23,7 @@
     <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
     <!-- versions -->
-    <version.cibseven>2.2.0</version.cibseven>
+    <version.cibseven>2.3.0-SNAPSHOT</version.cibseven>
     <version.springBoot>4.0.6</version.springBoot>
     <!-- tests -->
     <version.greenmail>2.1.9</version.greenmail>
